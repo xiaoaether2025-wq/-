@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Pizza World</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background: black;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links div {
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    background: url('https://avatars.mds.yandex.net/i?id=91f837b4eb53c9dedc2ec298a51d642ee16fd9c5-5350015-images-thumbs&n=13') center/cover;
+    text-align: center;
+    padding: 110px 20px;
+}
+
+/* SECTIONS */
+.section {
+    padding: 20px;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.card {
+    width: 240px;
+    background: #1c1c1c;
+    border-radius: 10px;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px red;
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#cart {
+    background: #121212;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: black;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div>🍕 Pizza World</div>
+    <div class="nav-links">
+        <div onclick="scrollToSection('menu')">Меню</div>
+        <div onclick="scrollToSection('reviews')">Отзывы</div>
+        <div onclick="scrollToSection('order')">Заказ</div>
+        <div onclick="scrollToSection('cart')">Корзина</div>
+        <div onclick="scrollToSection('contacts')">Контакты</div>
+        <div onclick="toggleLang()">🌐</div>
+        <div onclick="login()">Войти</div>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1 id="title">🍕 Pizza World</h1>
+    <p id="subtitle">Горячая пицца с доставкой за 30 минут 🚀</p>
+</div>
+
+<!-- MENU -->
+<div class="section" id="menu">
+
+<h2>🍕 Пиццы</h2>
+<div class="cards">
+
+<div class="card">
+<img src="https://avatars.mds.yandex.net/i?id=ef1af700f105b93b2942d1b96deff2b6f9029008-4434285-images-thumbs&n=13">
+<h3>Маргарита</h3>
+<p>2500 ₸</p>
+<button onclick="addToCart('Маргарита',2500)">В корзину</button>
+</div>
+
+<div class="card">
+<img src="https://avatars.mds.yandex.net/i?id=577b165195a61e9e0a7e91e1f303ffdd73482c60-10639206-images-thumbs&n=13">
+<h3>Пепперони</h3>
+<p>3000 ₸</p>
+<button onclick="addToCart('Пепперони',3000)">В корзину</button>
+</div>
+
+<div class="card">
+<img src="https://avatars.mds.yandex.net/i?id=920e319ef8c6dd704428491f2c535bdfb2791bb7-5858998-images-thumbs&n=13">
+<h3>Гавайская</h3>
+<p>3200 ₸</p>
+<button onclick="addToCart('Гавайская',3200)">В корзину</button>
+</div>
+
+<div class="card">
+<img src="https://avatars.mds.yandex.net/i?id=8f27d3a40311461f3a13d4544e675a0129698e4d-5386437-images-thumbs&n=13">
+<h3>4 сыра</h3>
+<p>3400 ₸</p>
+<button onclick="addToCart('4 сыра',3400)">В корзину</button>
+</div>
+
+</div>
+
+<h2>🥤 Напитки</h2>
+<div class="cards">
+
+<div class="card">
+<img src="https://th.bing.com/th/id/OIP.hg_CjErk5ZmKhlT_roLNvgHaLf">
+<h3>Кола</h3>
+<p>800 ₸</p>
+<button onclick="addToCart('Кола',800)">В корзину</button>
+</div>
+
+<div class="card">
+<img src="https://th.bing.com/th/id/OIP.QoaDSMrkbqU50B9UiudK7QAAAA">
+<h3>Вода</h3>
+<p>500 ₸</p>
+<button onclick="addToCart('Вода',500)">В корзину</button>
+</div>
+
+</div>
+
+<h2>🔥 Сеты</h2>
+<div class="cards">
+
+<div class="card">
+<img src="https://th.bing.com/th/id/OIP.uOycHtQdh8pwf-CxiZHiPAHaEq">
+<h3>Семейный сет</h3>
+<p>9000 ₸</p>
+<button onclick="addToCart('Семейный сет',9000)">В корзину</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CART -->
+<div class="section" id="cart">
+<h2>🛒 Корзина</h2>
+<ul id="cartList"></ul>
+<p id="total">Итого: 0 ₸</p>
+</div>
+
+<!-- CONTACTS -->
+<div class="section" id="contacts">
+<h2>📍 Контакты</h2>
+<p>г. Кызылорда</p>
+<p>+7 777 123 45 67</p>
+</div>
+
+<footer>© 2026 Pizza World</footer>
+
+<script>
+
+let cart = [];
+let total = 0;
+let lang = "ru";
+
+function addToCart(name, price) {
+    cart.push({name, price});
+    total += price;
+    renderCart();
+}
+
+function renderCart() {
+    let list = document.getElementById("cartList");
+    list.innerHTML = "";
+
+    cart.forEach(item => {
+        let li = document.createElement("li");
+        li.textContent = item.name + " - " + item.price + " ₸";
+        list.appendChild(li);
+    });
+
+    document.getElementById("total").textContent = "Итого: " + total + " ₸";
+}
+
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function login() {
+    let name = prompt("Введите имя:");
+    if(name){
+        alert("Добро пожаловать " + name);
+    }
+}
+
+function toggleLang() {
+    if(lang === "ru") {
+        document.getElementById("title").textContent = "🍕 Пицца Әлемі";
+        document.getElementById("subtitle").textContent = "30 минутта жеткізу 🚀";
+        lang = "kz";
+    } else {
+        document.getElementById("title").textContent = "🍕 Pizza World";
+        document.getElementById("subtitle").textContent = "Горячая пицца с доставкой за 30 минут 🚀";
+        lang = "ru";
+    }
+}
+
+</script>
+
+</body>
+</html>
